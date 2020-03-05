@@ -4,73 +4,42 @@
         <el-form :model="dataForm" :rules="rules" ref="dataForm" label-width="120px" :inline="true" labelSuffix="："
                  size="mini" class="tb-matthew">
             <el-form-item prop="id" v-show="false" />
-            <el-form-item prop="cateCode" :label="data.form.input.cateCode">
-                <im-selector
-                        placeholder="请选择物料名称"
-                        v-model="dataForm.cateCode"
-                        :mapModel.sync="dataForm"
-                        mapKeyVal="cateName:cateCode"
-                        dataType="biz.pcategory"
-                        style="width: 200px">
-                </im-selector>
+            <el-form-item prop="prodno" :label="data.form.input.prodno">
+                <el-input v-model="dataForm.prodno" :placeholder="data.form.input.prodno" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="code" :label="data.form.input.code">
-                <el-input v-model="dataForm.code" :placeholder="data.form.input.code" :disabled="dataForm.id"/>
+            <el-form-item prop="name" :label="data.form.input.name">
+                <el-input v-model="dataForm.name" :placeholder="data.form.input.name" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="alisaName" :label="data.form.input.alisaName">
-                <el-input v-model="dataForm.alisaName" :placeholder="data.form.input.alisaName"/>
+            <el-form-item prop="manufacture" :label="data.form.input.manufacture">
+                <el-input v-model="dataForm.manufacture" :placeholder="data.form.input.manufacture" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="vehicleId" :label="data.form.input.vehicleId">
-                <im-selector
-                        placeholder="请选择物料车型"
-                        v-model="dataForm.vehicleId"
-                        :mapModel.sync="dataForm"
-                        mapKeyVal="vName:vehicleId"
-                        dataType="biz.pvehicle"
-                        style="width: 200px">
-                </im-selector>
+            <el-form-item prop="approvalno" :label="data.form.input.approvalno">
+                <el-input v-model="dataForm.approvalno" :placeholder="data.form.input.approvalno" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="brandId" :label="data.form.input.brandId">
-                <im-selector
-                        placeholder="请选择物料品牌"
-                        v-model="dataForm.brandId"
-                        :mapModel.sync="dataForm"
-                        mapKeyVal="bName:brandId"
-                        dataType="bizweak.pbrand" style="width: 200px">
-                </im-selector>
+            <el-form-item prop="busitypetext" :label="data.form.input.busitypetext">
+                <el-input v-model="dataForm.busitypetext" :placeholder="data.form.input.busitypetext" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="madeinId" :label="data.form.input.madeinId">
-                <im-selector
-                        placeholder="请选择物料产地"
-                        v-model="dataForm.madeinId"
-                        :mapModel.sync="dataForm"
-                        mapKeyVal="mName:madeinId"
-                        dataType="biz.pmadein"
-                        style="width: 200px">
-                </im-selector>
+            <el-form-item prop="midpackagequantity" :label="data.form.input.midpackagequantity">
+                <el-input v-model="dataForm.midpackagequantity" :placeholder="data.form.input.midpackagequantity" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="barCode" :label="data.form.input.barCode">
-                <el-input v-model="dataForm.barCode" :placeholder="data.form.input.barCode" :disabled="dataForm.id"/>
+            <el-form-item prop="bigpackagequantity" :label="data.form.input.bigpackagequantity">
+                <el-input v-model="dataForm.bigpackagequantity" :placeholder="data.form.input.bigpackagequantity" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="picCode" :label="data.form.input.picCode">
-                <el-input v-model="dataForm.picCode" :placeholder="data.form.input.picCode"/>
+            <el-form-item prop="purchaser" :label="data.form.input.purchaser">
+                <el-input v-model="dataForm.purchaser" :placeholder="data.form.input.purchaser"/>
             </el-form-item>
             <el-form-item prop="specialParam" :label="data.form.input.specialParam">
-                <el-input v-model="dataForm.specialParam" :placeholder="data.form.input.specialParam"/>
+                <el-input v-model="dataForm.specialParam" :placeholder="data.form.input.specialParam" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="desc" :label="data.form.input.desc">
-                <el-input v-model="dataForm.desc" :placeholder="data.form.input.desc"/>
-            </el-form-item>
+
             <el-form-item prop="unit" :label="data.form.input.unit">
-                <el-input v-model="dataForm.unit" :placeholder="data.form.input.unit"/>
+                <el-input v-model="dataForm.unit" :placeholder="data.form.input.unit" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="volume" :label="data.form.input.volume">
-                <el-input v-model="dataForm.volume" :placeholder="data.form.input.volume"/>
+            <el-form-item prop="sterilization" :label="data.form.input.sterilization">
+                <el-input v-model="dataForm.sterilization" :placeholder="data.form.input.sterilization" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="defaultVendorId" :label="data.form.input.weight">
-                <el-input v-model="dataForm.weight" :placeholder="data.form.input.weight"/>
-            </el-form-item>
-            <el-form-item prop="defaultVendorId" :label="data.form.input.defaultVendorId">
+
+            <!--<el-form-item prop="defaultVendorId" :label="data.form.input.defaultVendorId">
                 <im-selector
                         placeholder="请选择供应商"
                         v-model="dataForm.defaultVendorId"
@@ -79,15 +48,9 @@
                         dataType="biz.customer"
                         style="width: 200px">
                 </im-selector>
-            </el-form-item>
+            </el-form-item>-->
             <el-form-item prop="status" :label="data.form.input.status">
                 <el-input v-model="dataForm.status" :placeholder="data.form.input.status"/>
-            </el-form-item>
-            <el-form-item prop="salePrice" :label="data.form.input.salePrice">
-                <el-input v-model="dataForm.salePrice" :placeholder="data.form.input.salePrice"/>
-            </el-form-item>
-            <el-form-item prop="costPrice" :label="data.form.input.costPrice">
-                <el-input v-model="dataForm.costPrice" :placeholder="data.form.input.costPrice"/>
             </el-form-item>
             <el-form-item prop="remark" :label="data.form.input.remark">
                 <el-input v-model="dataForm.remark" :placeholder="data.form.input.remark"/>
@@ -112,11 +75,11 @@ export default {
         callback(new Error('内容不能为空'))
       } else {
         let form = {}
-        if (this.dataForm.code) {
-          form.code = this.dataForm.code
+        if (this.dataForm.name) {
+          form.name = this.dataForm.name
         }
-        if (this.dataForm.barCode) {
-          form.barCode = this.dataForm.barCode
+        if (this.dataForm.prodno) {
+          form.prodno = this.dataForm.prodno
         }
         if (this.dataForm.id) {
           form.id = this.dataForm.id
@@ -167,28 +130,21 @@ export default {
       visible: false,
       dataForm: {
         id: undefined,
-        code: undefined,
+        prodno: undefined,
         name: undefined,
-        alisaName: undefined,
-        categoryId: undefined,
-        vehicleId: undefined,
-        brandId: undefined,
-        madeinId: undefined,
-        barCode: undefined,
-        picCode: undefined,
+        manufacture: undefined,
+        approvalno: undefined,
+        bigpackagequantity: undefined,
+        midpackagequantity: undefined,
+        busitypetext: undefined,
+        purchaser: undefined,
+        sterilization: undefined,
         specialParam: undefined,
-        desc: undefined,
         unit: undefined,
-        volume: undefined,
-        weight: undefined,
         defaultVendorId: undefined,
         status: undefined,
         pinyinCode: undefined,
-        wbCode: undefined,
-        salePrice: undefined,
-        costPrice: undefined,
-        remark: undefined,
-        cateCode: undefined
+        remark: undefined
       },
       rules: {
         cateCode: [{

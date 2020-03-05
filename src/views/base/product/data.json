@@ -1,29 +1,22 @@
 {
   "form": {
     "input": {
-      "code": "编号",
-      "name": "名称",
-      "categoryId": "分类",
-      "vehicleId": "车型",
-      "brandId": "品牌",
-      "madeinId": "产地",
-      "alisaName": "别名",
-      "barCode": "条码",
-      "picCode": "图号",
+      "prodno": "商品编码",
+      "name": "商品名称",
+      "approvalno": "批准文号",
+      "bigpackagequantity": "大包装数量",
+      "midpackagequantity": "中包装数量",
+      "busitypetext": "业务类型",
+      "manufacture": "生产厂家",
+      "purchaser": "采购员",
+      "sterilization": "灭菌批号",
       "specialParam": "规格属性",
-      "desc": "描述",
-      "unit": "单位",
-      "volume": "体积",
-      "weight": "重量",
+      "unit": "包装单位",
       "defaultVendorId": "默认供应商",
-      "status": "物料状态",
-      "pinyinCode": "拼音码",
-      "wbCode": "五笔码",
-      "salePrice": "销售价",
-      "costPrice": "成本价",
+      "status": "商品状态",
+      "pinyinCode": "助记码",
       "remark": "备注",
-      "companyId": "公司",
-      "cateCode": "物料名称"
+      "companyId": "公司"
     }
   }
 }

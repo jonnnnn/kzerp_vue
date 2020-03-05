@@ -223,7 +223,7 @@ export default {
   components: {},
   data () {
     return {
-      tableData: [
+      tableData: [/*
         {
           prod: '刹车鼓',
           qty: 100,
@@ -260,7 +260,7 @@ export default {
           prod: '刹车鼓',
           qty: 100,
           amt: 2000.00
-        }],
+        }*/],
       chartData: {
         columns: ['日期', '访问用户', '下单用户', '下单率'],
         rows: [
@@ -304,8 +304,8 @@ export default {
 
   .box-card {
     .card-header {
-      margin: -18px -20px; 
-      padding: 10px 20px; 
+      margin: -18px -20px;
+      padding: 10px 20px;
       font-size: 14px;
     }
   }

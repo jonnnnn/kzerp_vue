@@ -41,7 +41,7 @@
       <template v-slot:buttons>
         <el-button v-show="enableSubmit && (entityModel.status !== 'SUBMIT' && entityModel.status !== 'SENDED')" size="mini" icon="el-icon-circle-plus" @click="$refs.sGrid.insert({})">新增</el-button>
         <el-button
-          v-show="enableSubmit &&  (entityModel.status !== 'SUBMIT' && entityModel.status !== 'SENDED')" 
+          v-show="enableSubmit &&  (entityModel.status !== 'SUBMIT' && entityModel.status !== 'SENDED')"
           type="danger"
           size="mini"
           icon="el-icon-delete"
@@ -50,7 +50,7 @@
       </template>
     </vxe-grid>
     <span slot="footer" class="dialog-footer">
-      <el-button 
+      <el-button
         v-show="enableSubmit" type="danger" @click="visible = false">取消</el-button>
       <el-button
         type="primary"
@@ -59,6 +59,7 @@
         @click="dataFormSubmit"
       >确定</el-button>
     </span>
+
   </el-dialog>
 </template>
 
@@ -87,16 +88,14 @@ export default {
         contactName: "",
         contactPhone: "",
         agentId: "",
-        warehouseId: "",
         planDeliveryDate: "",
-        payType: null,
-        shipType: null,
-        shipName: null,
-        shipId: null,
-        shipNum: null,
-        freight: null,
-        isAuto: true,
-        remark: ""
+        orderQty: "",
+        realQty: "",
+        totalAcceptQty: "",
+        costPrice: ""
+        /*isAuto: true,*/
+        /*note: "",*/
+
       },
       descriptors: {
         orderNum: {
@@ -118,7 +117,7 @@ export default {
           },
           required: true
         },
-        warehouseId: {
+        /*warehouseId: {
           type: "cust",
           label: "仓库",
           ruletype: "integer",
@@ -129,7 +128,7 @@ export default {
             clearable: true
           },
           required: true
-        },
+        },*/
         separate1: separate,
         vendorId: {
           type: "cust",
@@ -205,7 +204,7 @@ export default {
             clearable: true
           }
         },
-        isAuto: {
+        /*isAuto: {
           label: "拣货方式",
           type: "boolean",
           required: true,
@@ -213,7 +212,7 @@ export default {
             inactiveText: "人工",
             activeText: "自动"
           }
-        },
+        },*/
         separate4: separate,
         remark: { type: "string", label: "备注", colspan: 3 }
       },
@@ -221,7 +220,8 @@ export default {
         autoLoad: false
       },
       validRules: {
-        productCode: [{ required: true, message: "物料必填" }],
+        prodname: [{ required: true, message: "商品必填" }],
+        prodno: [{ required: true, message: "商品必填" }],
         orderQty: [
           { required: true, message: "下单数必填" },
           { type: "number", message: "请输入数字" }
@@ -230,7 +230,7 @@ export default {
           { required: true, message: "采购价必填" },
           { type: "number", message: "请输入数字" }
         ],
-        acceptQty: [
+        realQty: [
           {
             validator: (rule, val, callback,{row})=>{
               if(val) {
@@ -245,11 +245,17 @@ export default {
         ]
       },
       tableColumn: [
-        { type: "selection", width: 30, align: "center" }, 
+        { type: "selection", width: 30, align: "center" },
         { type: "index", width: 40, align: "center" },
         {
-          title: "商品",
-          field: "productCode",
+          title: "商品编码",
+          field: "prodno",
+          sortable: true,
+          align: "center"
+        },
+        {
+          title: "商品名称",
+          field: "name",
           sortable: true,
           align: "center",
           editRender: {
@@ -267,57 +273,54 @@ export default {
           }
         },
         {
-          title: "单位",
-          field: "uom",
+          title: "包装单位",
+          field: "unit",
           sortable: true,
           align: "center"
         },
         {
-          title: "物料描述",
-          field: "description",
+          title: "规格",
+          field: "specialParam",
           sortable: true,
           align: "center"
         },
         {
-          title: "下单数",
+          title: '生产厂家',
+          field: 'manufacture',
+          width: '110px',
+          align: 'left'
+        },{
+          title: '批准文号',
+          field: 'approvalno',
+          width: '110px',
+          align: 'left'
+        },{
+          title: '业务类型',
+          field: 'busitypetext',
+          width: '110px',
+          align: 'center'
+        },{
+          title: '灭菌批号',
+          field: 'sterilization',
+          width: '110px',
+          align: 'center'
+        },
+        {
+          title: "订单数量",
           field: "orderQty",
           sortable: true,
           align: "center",
+          formatter: this.formatter,
           editRender: { name: "input" },
           footerRender: this.footerSum
-        },
-        {
-          title: "累计收货数",
-          field: "totalAcceptQty",
-          sortable: true,
-          align: "center",
-          footerRender: this.footerSum
-        },
-        {
-          title: "收货数",
-          field: "acceptQty",
-          sortable: true,
-          align: "center",
-          footerRender: this.footerSum
-        },
-        {
+        },{
           title: "采购价",
           field: "costPrice",
           sortable: true,
           align: "right",
           formatter: this.formatterMoney,
           editRender: { name: "input" }
-        },
-        /*{
-          title: "分摊运费",
-          field: "freight",
-          sortable: true,
-          align: "right",
-          formatter: this.formatterMoney,
-          editRender: { name: "input" },
-          footerRender: this.footerSum
-        },*/
-        {
+        },{
           title: "采购总金额",
           field: "totalPrice",
           align: "right",
@@ -331,13 +334,44 @@ export default {
           },
           footerRender: this.footerSum
         },
+        /*{
+          title: "收货数",
+          field: "realQty",
+          sortable: true,
+          align: "center",
+          footerRender: this.footerSum
+        },{
+          title: "累计收货数",
+          field: "totalAcceptQty",
+          sortable: true,
+          align: "center",
+          footerRender: this.footerSum
+        },*/
+
+        /*{
+          title: "分摊运费",
+          field: "freight",
+          sortable: true,
+          align: "right",
+          formatter: this.formatterMoney,
+          editRender: { name: "input" },
+          footerRender: this.footerSum
+        },*/
+        {
+          title: '备注',
+          field: 'note',
+          align: 'center',
+          width: '130px',
+          editRender: { name: 'input' ,autoselect: true}
+        }
+        /*,
         {
           title: "货位",
           field: "warehouseSlotId",
           sortable: true,
           align: "center",
           editRender: { name: "input" }
-        }
+        }*/
       ],
       toolbar: {
         id: "full_edit_1",
@@ -354,10 +388,10 @@ export default {
     prodSeach(queryString, cb) {
       if (queryString) {
         this.$axios
-          .post(this.mixinViewModuleOptions.prodURL, { name: queryString,warehouseId:this.dataForm.warehouseId })
+          .post(this.mixinViewModuleOptions.prodURL, { name: queryString })
           .then(res => {
             for (var i = 0; i < res.length; i++) {
-              res[i].value = res[i].val;
+              res[i].value = res[i].allString;
             }
             clearTimeout(this.timeout);
             this.timeout = setTimeout(() => {
@@ -370,9 +404,9 @@ export default {
       var row = t.row;
       if (item) {
         Object.assign(row, item);
-        row.uom = item.unit;
         row.productId = item.id;
-        row.productCode = item.code;
+        row.productName = item.name;
+        row.uom = item.unit
       } else {
       }
     },
@@ -385,6 +419,7 @@ export default {
           if (this.entityModel.status === "NEW") {
             this.$refs.dataForm.readOnly(false);
           } else {
+
             if (this.entityModel.status === "SUBMIT" || this.entityModel.status === 'SENDED') {
               this.entityModel.saveType='pick'
               this.enableSubmit = true;
@@ -398,9 +433,10 @@ export default {
                 "isAuto",
                 "remark"
               ]);
-              delete this.tableColumn[2].editRender
-              delete this.tableColumn[5].editRender
-              Object.assign(this.tableColumn[7] ,{editRender: { name: "input" }})
+              delete this.tableColumn[3].editRender;
+              /*delete this.tableColumn[10].editRender;*/
+              delete this.tableColumn[11].editRender;
+              Object.assign(this.tableColumn[13] ,{editRender: { name: "input" }})
               /*Object.assign(this.tableColumn[9] ,{editRender: { name: "input" }})*/
               this.$refs.sGrid.loadColumn(this.tableColumn)
               return
@@ -410,21 +446,8 @@ export default {
           }
         }
         delete this.dataForm.saveType
-        delete this.tableColumn[7].editRender
-        /*delete this.tableColumn[9].editRender*/
-        Object.assign(this.tableColumn[5] ,{editRender: { name: "input" }})
-        Object.assign(this.tableColumn[2] ,{
-          editRender: {
-            name: "ElAutocomplete",
-            props: {
-              fetchSuggestions: this.prodSeach,
-              triggerOnFocus: false,
-              popperClass: "prod-popper"
-            },
-            events: { select: this.handleProcSelect },
-            autoselect: true
-          }
-        })
+       /* delete this.tableColumn[7].editRender*/
+
         this.$refs.sGrid.loadColumn(this.tableColumn)
       });
     },

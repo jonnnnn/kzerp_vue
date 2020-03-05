@@ -82,7 +82,7 @@
                         @click="updateHandle($refs.pGrid)"
                 >修改
                 </el-button>
-                <el-button
+               <!-- <el-button
                         ref="btnDelete"
                         type="danger"
                         size="mini"
@@ -97,7 +97,7 @@
                         icon="el-icon-star-off"
                         @click="addContact($refs.pGrid)"
                 >联系人信息
-                </el-button>
+                </el-button>-->
             </template>
         </vxe-grid>
         <el-pagination
@@ -134,26 +134,16 @@ export default {
         deleteIsBatch: true
       },
       dataForm: {
-        custVendor: undefined,
-        code: undefined,
-        name: undefined,
-        shortName: undefined,
-        type: undefined,
-        tel: undefined,
-        fax: undefined,
-        email: undefined,
-        mm: undefined,
-        companyId: undefined,
-        companyAddress: undefined,
-        legalMan: undefined,
-        webSite: undefined,
-        bank: undefined,
-        bankAccount: undefined,
-        taxNum: undefined,
-        pinyinCode: undefined,
-        wbCode: undefined,
-        pic: undefined,
-        remark: undefined
+          custVendor: undefined,
+          custno: undefined,
+          custname: undefined,
+          isActive: undefined,
+          relation: undefined,
+          custtype: undefined,
+          ownerareatext: undefined,
+          purchaser: undefined,
+          pinyinCode: undefined,
+          remark: undefined
       },
       vendor: {
         CUST: '顾客',
@@ -168,93 +158,92 @@ export default {
           align: 'center',
           width: '120px',
           formatter: this.flagSelector
+        },{
+          title: '客户编码',
+          field: 'custno',
+          sortable: true,
+          align: 'center',
+          width: '120px'
         },
         {
-          title: '名称',
-          field: 'name',
+          title: '客户名称',
+          field: 'custname',
           sortable: true,
           align: 'center',
           width: '150px'
         },
         {
-          title: '简称',
-          field: 'shortName',
+          title: '客户标识',
+          field: 'custidentify',
           sortable: true,
           align: 'center',
           width: '150px'
         }, {
-          title: '类型',
-          field: 'tName',
+          title: '联系人',
+          field: 'contactperson',
           sortable: true,
           align: 'center',
-          width: '50px'
+          width: '70px'
         },
         {
-          title: '公司电话',
-          field: 'tel',
-          sortable: true,
-          align: 'center',
-          width: '120px'
-        },
-        {
-          title: '公司传真',
-          field: 'fax',
+          title: '联系电话',
+          field: 'contactphone',
           sortable: true,
           align: 'center',
           width: '120px'
         },
         {
-          title: '公司邮箱',
-          field: 'email',
+          title: '客户地址',
+          field: 'custadd',
           sortable: true,
           align: 'center',
           width: '120px'
         },
         {
-          title: '公司微信号',
-          field: 'mm',
+          title: '客户类型',
+          field: 'custtype',
+          sortable: true,
+          align: 'center',
+          width: '120px'
+        },
+        {
+          title: '关联关系',
+          field: 'relation',
           sortable: true,
           align: 'center',
           width: '130px'
         },
         {
-          title: '公司地址',
-          field: 'companyAddress',
+          title: '是否活动',
+          field: 'isActive',
           sortable: true,
           align: 'center',
           width: '120px'
         },
         {
-          title: '法人',
-          field: 'legalMan',
+          title: '所属大区',
+          field: 'ownerareatext',
           sortable: true,
           align: 'center',
           width: '80px'
         },
         {
-          title: '公司网址',
-          field: 'webSite',
+          title: '采购员',
+          field: 'purchaser',
           sortable: true,
           align: 'center',
           width: '120px'
         },
         {
-          title: '开户银行',
-          field: 'bank',
+          title: '业务员',
+          field: 'businessman',
           sortable: true,
           align: 'center',
           width: '120px'
         },
         {
-          title: '银行账号',
-          field: 'bankAccount',
-          sortable: true,
-          align: 'center',
-          width: '120px'
-        },
-        {
-          title: '纳税号',
-          field: 'taxNum',
+          title: '开票员',
+          field: 'mainopname',
           sortable: true,
           align: 'center',
           width: '120px'
@@ -267,22 +256,17 @@ export default {
           width: '120px'
         },
         {
-          title: '五笔码',
-          field: 'wbCode',
+          title: '创建日期',
+          field: 'createDate',
           sortable: true,
           align: 'center',
-          width: '120px'
-        },
-        {
-          title: '业务员',
-          field: 'pic',
-          sortable: true,
-          align: 'center',
-          width: '120px'
+          width: '120px',
+          formatter: ['toDateString', 'yyyy-MM-dd']
         },
         {
           title: '备注',
           field: 'remark',
+          width: '200px',
           sortable: true,
           align: 'center'
         },

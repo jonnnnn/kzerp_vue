@@ -60,8 +60,8 @@
             {{ $t('views.system.login.footer.copyright.copyright') }}
             <d2-icon name="copyright" />
             <a
-              href="http://www.imema.com.cn"
-            >2018-2019 广州盟码信息科技有限公司</a>
+              href="#"
+            >2019-2020 山西九州通医药有限公司</a>
           </p>
           <p class="page-login--content-footer-options">
             <a href="#">{{ $t('views.system.login.footer.button.help') }}</a>

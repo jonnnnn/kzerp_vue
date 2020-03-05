@@ -27,11 +27,11 @@ import pluginExport from '@d2-projects/vue-table-export'
 import pluginImport from '@d2-projects/vue-table-import'
 // [ 可选过滤器 ] 日期相关过滤器
 import d2VueFiltersDayjs from '@d2-admin/filters-dayjs'
+// [vxe表格] 表格插件
+import 'xe-utils'
 // [ 可选数据表 ] 数据表插件
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/index.css'
-// [vxe表格] 表格插件
-import 'xe-utils'
 import VXETablePluginElement from 'vxe-table-plugin-element'
 import 'vxe-table-plugin-element/dist/style.css'
 // [] 动态表单插件
@@ -66,6 +66,7 @@ VXETable.use(VXETablePluginElement)
 Vue.use(VXETable)
 Vue.use(DynamicForm)
 Vue.use(OnlyNumber)
+
 //Vue.use()
 Vue.component('ElAutocompleteItem', ElAutocompleteItem)
 Vue.component('ImSelector', ImSelector)

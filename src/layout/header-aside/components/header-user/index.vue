@@ -6,10 +6,10 @@
         <d2-icon name="power-off" class="d2-mr-5"/>
         {{ $t('layout.header-aside.header-user.log-off') }}
       </el-dropdown-item>
-      <el-dropdown-item @click.native="reloadMenu">
+      <!--<el-dropdown-item @click.native="reloadMenu">
         <d2-icon name="refresh" class="d2-mr-5"/>
-        重新加载菜单
-      </el-dropdown-item>
+        菜单重新加载
+      </el-dropdown-item>-->
     </el-dropdown-menu>
   </el-dropdown>
 </template>

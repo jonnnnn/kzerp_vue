@@ -125,13 +125,15 @@
         show-footer
         @cell-dblclick="cellDblClick">
       <template v-slot:buttons>
-        <el-button size="mini" icon="el-icon-circle-plus" 
-          v-if="$hasPermission('so:salesorder:save')" @click="addHandle">新增</el-button>
-        <el-button size="mini" type="primary" icon="el-icon-edit" 
-          v-if="$hasPermission('so:salesorder:update')" @click="updateHandle($refs.pGrid)">修改</el-button>
-        <el-button size="mini" type="danger" icon="el-icon-delete" 
-          v-if="$hasPermission('so:salesorder:delete')" @click="deleteHandle($refs.pGrid)">删除</el-button>
-        <el-button size="mini" type="success" icon="el-icon-check" @click="submitHandle()">提交</el-button>
+        <el-button size="mini" icon="el-icon-circle-plus"
+          v-if="$hasPermission('so:salesorder:save')" ref="btnStatusAdd" enablestatus='NEW,SUBMIT' @click="addHandle">新增</el-button>
+
+        <el-button ref="btnStatusEdit" enablestatus='NEW' size="mini" type="primary" icon="el-icon-edit"
+          v-if="$hasPermission('so:salesorder:update')"  @click="updateHandle($refs.pGrid)">修改</el-button>
+
+        <el-button size="mini" type="danger" icon="el-icon-delete"
+          v-if="$hasPermission('so:salesorder:delete')" ref="btnStatusDelete" enablestatus='NEW' @click="deleteHandle($refs.pGrid)">删除</el-button>
+        <el-button size="mini" type="success" ref="btnStatusSubmit" enablestatus='NEW' icon="el-icon-check" @click="submitHandle()">提交</el-button>
         <el-button size="mini" type="info" icon="el-icon-printer" @click="deleteHandle()">打印</el-button>
         <el-button size="mini" type="info" icon="fa fa-file-excel-o" @click="$refs.pGrid.exportCsv()">导出</el-button>
       </template>
@@ -232,6 +234,21 @@ export default {
         {
           title: '发运方式',
           field: 'shipTypeMean',
+          width: '80px',
+          align: 'center'
+        },{
+          title: '收货人',
+          field: 'receiveName',
+          width: '80px',
+          align: 'center'
+        },{
+          title: '收货人电话',
+          field: 'receivePhone',
+          width: '80px',
+          align: 'center'
+        },{
+          title: '收货人地址',
+          field: 'receiveAddress',
           width: '80px',
           align: 'center'
         },

@@ -7,10 +7,10 @@
                 </template>
                 <el-form :inline="true" size="mini" :model="dataForm" @keyup.enter.native="search" ref="dataForm">
 
-                    <el-form-item prop="code">
+                    <el-form-item prop="prodno">
                         <el-input
-                                v-model="dataForm.code"
-                                :placeholder="data.form.input.code"
+                                v-model="dataForm.prodno"
+                                :placeholder="data.form.input.prodno"
                                 clearable
                         />
                     </el-form-item>
@@ -28,10 +28,10 @@
                                 clearable
                         />
                     </el-form-item>
-                    <el-form-item prop="categoryId">
+                    <el-form-item prop="approvalno">
                         <el-input
-                                v-model="dataForm.categoryId"
-                                :placeholder="data.form.input.categoryId"
+                                v-model="dataForm.approvalno"
+                                :placeholder="data.form.input.approvalno"
                                 clearable
                         />
                     </el-form-item>
@@ -133,12 +133,10 @@ export default {
         deleteIsBatch: true
       },
       dataForm: {
-        code: undefined,
+        prodno: undefined,
         name: undefined,
-        categoryId: undefined,
-        vehicleId: undefined,
-        brandId: undefined,
-        madeinId: undefined
+        manufacture:undefined,
+        approvalno: undefined
       },
       rowHandler: {
         width: '160px',
@@ -176,60 +174,54 @@ export default {
       columns: [
         { type: 'index', width: 30 },
         {
-          title: '编号',
-          field: 'code',
+          title: '商品编码',
+          field: 'prodno',
           sortable: true,
           align: 'center',
           width: '110px'
         },
         {
-          title: '名称',
-          field: 'cateName',
+          title: '商品名称',
+          field: 'name',
           sortable: true,
           align: 'center',
           width: '110px'
         },
         {
-          title: '别名',
-          field: 'alisaName',
+          title: '生产厂家',
+          field: 'manufacture',
           sortable: true,
           align: 'center',
           width: '110px'
         },
         {
-          title: '配件分类',
-          field: 'cName',
+          title: '批准文号',
+          field: 'approvalno',
           sortable: true,
           align: 'center',
           width: '110px'
         }, {
-          title: '车型',
-          field: 'vName',
+          title: '大包装数量',
+          field: 'bigpackagequantity',
           sortable: true,
           align: 'center',
           width: '110px'
         }, {
-          title: '品牌',
-          field: 'bName',
+          title: '中包装数量',
+          field: 'midpackagequantity',
           sortable: true,
           align: 'center',
           width: '110px'
         },
         {
-          title: '产地',
-          field: 'mName',
+          title: '业务类型',
+          field: 'busitypetext',
           sortable: true,
           align: 'center',
           width: '110px'
         }, {
-          title: '条码',
-          field: 'barCode',
-          sortable: true,
-          align: 'center',
-          width: '110px'
-        }, {
-          title: '图号',
-          field: 'picCode',
+          title: '采购员',
+          field: 'purchaser',
           sortable: true,
           align: 'center',
           width: '110px'
@@ -241,54 +233,34 @@ export default {
           width: '120px'
         },
         {
-          title: '描述',
-          field: 'desc',
-          sortable: true,
-          align: 'center',
-          width: '110px'
-        },
-        {
-          title: '单位',
+          title: '包装单位',
           field: 'unit',
           sortable: true,
           align: 'center',
           width: '110px'
         },
         {
-          title: '体积',
-          field: 'volume',
-          sortable: true,
-          align: 'center',
-          width: '110px'
-        },
-        {
-          title: '重量',
-          field: 'weight',
+          title: '灭菌批号',
+          field: 'sterilization',
           sortable: true,
           align: 'center',
           width: '110px'
         },
         {
           title: '默认供应商',
-          field: 'dName',
+          field: 'defaultVendorId',
           sortable: true,
           align: 'center',
           width: '140px'
         }, {
-          title: '物料状态',
+          title: '商品状态',
           field: 'status',
           sortable: true,
           align: 'center',
           width: '120px'
         }, {
-          title: '拼音码',
+          title: '助记码',
           field: 'pinyinCode',
-          sortable: true,
-          align: 'center',
-          width: '110px'
-        }, {
-          title: '五笔码',
-          field: 'wbCode',
           sortable: true,
           align: 'center',
           width: '110px'

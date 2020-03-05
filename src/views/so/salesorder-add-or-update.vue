@@ -62,11 +62,11 @@
               </im-selector>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <!--<el-col :span="8">
             <el-form-item label="仓库" prop="autoPeaking">
               <el-checkbox v-model="dataForm.autoPeaking">是否自动拣货</el-checkbox>
             </el-form-item>
-          </el-col>
+          </el-col>-->
           <el-col :span="8">
             <el-form-item label="订单金额" prop="orderAmount">
               <el-input v-model="dataForm.orderAmount" disabled placeholder="订单金额" clearable></el-input>
@@ -99,7 +99,7 @@
           </el-col>
         </el-row>
       </el-form>
-      
+
     </div>
     <vxe-grid
       border
@@ -141,6 +141,10 @@ export default {
   mixins: [mixinViewModule],
   data () {
     return {
+      restaurants: [],
+      state1: '',
+      state2: '',
+
       mixinViewModuleOptions: {
         getDataListURL: '/so/salesorderline/list',
         getDataListIsPage: false,
@@ -179,11 +183,11 @@ export default {
         autoLoad: false
       },
       validRules: {
-        productName: [
-          { required: true, message: '物料必填' }
+        name: [
+          { required: true, message: '商品必填' }
         ],
-        productCode: [
-          { required: true, message: '物料必填' }
+        prodno: [
+          { required: true, message: '商品必填' }
         ],
         orderQty: [
           { required: true, message: '销售数量必填'},
@@ -198,43 +202,60 @@ export default {
         { type: "selection", width: 50, align: "center" },
         { type: "index", width: 50, align: "center" },
         {
-          title: '物料名称',
-          field: 'productName',
+          title: '商品编码',
+          field: 'prodno',
+          width: '110px',
+          align: 'center'
+        },
+        {
+          title: '商品名称',
+          field: 'name',
           width: '150px',
           align: 'center',
           editRender: {
             name: 'ElAutocomplete',
-            props: { fetchSuggestions: this.prodSeach, triggerOnFocus: false ,popperClass:'prod-popper' },
+            props: { placeholder:"请输入内容",fetchSuggestions: this.prodSeach, triggerOnFocus: false ,popperClass:'prod-popper' },
             events: { select: this.handleProcSelect },
             autoselect: true
-          },
-          footerRender: function (column, data) {
-            return '汇总'
           }
         },
         {
-          title: '物料编码',
-          field: 'productCode',
+          title: '单位',
+          field: 'unit',
+          width: '40px',
+          align: 'center'
+        },
+        {
+          title: '规格',
+          field: 'specialParam',
+          width: '100',
+          align: 'center'
+        },
+        {
+          title: '生产厂家',
+          field: 'manufacture',
           width: '110px',
           align: 'left'
-        },
-        {
-          title: '库存',
-          field: 'stock',
-          width: '40px',
+        },{
+          title: '批准文号',
+          field: 'approvalno',
+          width: '110px',
           align: 'left'
-        },
-        {
-          title: '指导售价',
-          field: 'bPrice',
-          width: '60px',
-          align: 'left'
-        },
-        {
+        },{
+          title: '业务类型',
+          field: 'busitypetext',
+          width: '110px',
+          align: 'center'
+        },{
+          title: '灭菌批号',
+          field: 'sterilization',
+          width: '110px',
+          align: 'center'
+        },{
           title: '数量',
           field: 'orderQty',
-          align: 'left',
-          width: '40px',
+          align: 'center',
+          width: '60px',
           editRender: { name: 'input' ,autoselect: true}
         },
         {
@@ -242,14 +263,17 @@ export default {
           field: 'price',
           sortable: true,
           align: 'center',
-          width: '50px',
-          editRender: { name: 'input',autoselect: true}
+          width: '100px',
+          editRender: { name: 'input',autoselect: true},
+          footerRender: function (column, data) {
+            return '汇总'
+          }
         },
         {
           title: '总金额',
           field: 'amount',
           align: 'left',
-          width: '70px',
+          width: '100px',
           formatter: ['toFixedString', 2],
           needReturnAmount : true,
           editPost: function (column, row) {
@@ -262,48 +286,14 @@ export default {
           footerRender: function (column, data) {
             return XEUtils.sum(data, column.property)
           }
-        },
-        {
-          title: '单位',
-          field: 'unit',
-          width: '40px'
-        },
-        {
-          title: '条码',
-          field: 'barCode',
-          width: '110px',
-          align: 'left'
-        },
-        {
-          title: '品牌',
-          field: 'brand',
-          width: '80px',
-          align: 'left'
-        },
-        {
-          title: '车型',
-          field: 'vehicle',
-          width: '80px',
-          align: 'left'
-        },
-        {
-          title: '产地',
-          field: 'madein',
-          width: '80px',
-          align: 'left'
-        },
-        {
-          title: '规格属性',
-          field: 'specialParam',
-          width: '250px',
-          align: 'left'
-        },
-        {
-          title: '描述',
-          field: 'description',
-          width: '250px',
-          align: 'left'
+        },{
+          title: '备注',
+          field: 'note',
+          align: 'center',
+          width: '130px',
+          editRender: { name: 'input' ,autoselect: true}
         }
+
       ],
       toolbar: {
         id: 'full_edit_1',
@@ -314,20 +304,22 @@ export default {
           storage: true
         }
       }
-    }
+    };
   },
   methods: {
+
     prodSeach (queryString, cb) {
+
       if (queryString) {
         this.$axios
           .post(this.mixinViewModuleOptions.prodURL, { name: queryString ,customerId:this.dataForm.customerId,lastPrice:1})
           .then(res => {
             for (var i = 0; i < res.length; i++) {
-              res[i].value = res[i].val
+              res[i].value = res[i].allString;
             }
             clearTimeout(this.timeout)
             this.timeout = setTimeout(() => {
-              cb(res)
+              cb(res);
             }, 100 * Math.random())
           })
       }
@@ -346,15 +338,19 @@ export default {
         this.$refs.sGrid.updateFooter()
       } else {
       }
-    }, 
+    },
     changeCust (e) {
       console.log('------', e, this.dataForm)
     },
     setAmount(value){
       this.dataForm.orderAmount = value;
     },
-  },
-  mounted () {
+
+    mounted() {
+
+    }
+
   }
+
 }
 </script>

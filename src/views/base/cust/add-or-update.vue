@@ -9,79 +9,53 @@
                 <el-radio-group v-model="dataForm.custVendor" style="width: 400px">
                     <el-radio label='CUST'>客户</el-radio>
                     <el-radio label='VENDOR'>供应商</el-radio>
-                    <el-radio label='SUP'>物流公司 </el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item prop="name" :label="data.form.input.name">
-                <el-input v-model="dataForm.name" :placeholder="data.form.input.name"/>
+            <el-form-item prop="custno" :label="data.form.input.custno">
+                <el-input v-model="dataForm.custno" :placeholder="data.form.input.custno" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="shortName" :label="data.form.input.shortName">
-                <el-input v-model="dataForm.shortName" :placeholder="data.form.input.shortName"/>
+            <el-form-item prop="custname" :label="data.form.input.custname">
+                <el-input v-model="dataForm.custname" :placeholder="data.form.input.custname" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="type" :label="data.form.input.type">
-                <im-selector v-show="this.dataForm.custVendor==='CUST'"
-                        placeholder="请选择客户类型"
-                        v-model="dataForm.type"
-                        :mapModel.sync="dataForm"
-                        mapKeyVal="tName:type"
-                        dataType="biz.custType" style="width: 200px">
-                </im-selector>
-                <im-selector  v-show="this.dataForm.custVendor==='VENDOR'"
-                        placeholder="请选择供应商类型"
-                        v-model="dataForm.type"
-                        :mapModel.sync="dataForm"
-                        mapKeyVal="tName:type"
-                        dataType="biz.vendorType" style="width: 200px">
-                </im-selector>
-                <im-selector  v-show="this.dataForm.custVendor==='SUP'"
-                              placeholder="请选择物流公司"
-                              v-model="dataForm.type"
-                              :mapModel.sync="dataForm"
-                              mapKeyVal="tName:type"
-                              dataType="biz.supType" style="width: 200px">
-                </im-selector>
+
+            <el-form-item prop="custidentify" :label="data.form.input.custidentify">
+                <el-input v-model="dataForm.custidentify" :placeholder="data.form.input.custidentify" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="tel" :label="data.form.input.tel">
-                <el-input v-model="dataForm.tel" :placeholder="data.form.input.tel"/>
+            <el-form-item prop="contactperson" :label="data.form.input.contactperson">
+                <el-input v-model="dataForm.contactperson" :placeholder="data.form.input.contactperson"/>
             </el-form-item>
-            <el-form-item prop="fax" :label="data.form.input.fax">
-                <el-input v-model="dataForm.fax" :placeholder="data.form.input.fax"/>
+            <el-form-item prop="contactphone" :label="data.form.input.contactphone">
+                <el-input v-model="dataForm.contactphone" :placeholder="data.form.input.contactphone"/>
             </el-form-item>
-            <el-form-item prop="email" :label="data.form.input.email">
-                <el-input v-model="dataForm.email" :placeholder="data.form.input.email"/>
+            <el-form-item prop="custadd" :label="data.form.input.custadd">
+                <el-input v-model="dataForm.custadd" :placeholder="data.form.input.custadd"/>
             </el-form-item>
-            <el-form-item prop="mm" :label="data.form.input.mm">
-                <el-input v-model="dataForm.mm" :placeholder="data.form.input.mm"/>
+            <el-form-item prop="custtype" :label="data.form.input.custtype">
+                <el-input v-model="dataForm.custtype" :placeholder="data.form.input.custtype" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="companyAddress" :label="data.form.input.companyAddress">
-                <el-input v-model="dataForm.companyAddress" :placeholder="data.form.input.companyAddress"/>
+            <el-form-item prop="relation" :label="data.form.input.relation">
+                <el-input v-model="dataForm.relation" :placeholder="data.form.input.relation" :disabled="dataForm.id"/>
             </el-form-item>
-            <el-form-item prop="legalMan" :label="data.form.input.legalMan">
-                <el-input v-model="dataForm.legalMan" :placeholder="data.form.input.legalMan"/>
+            <el-form-item prop="isActive" :label="data.form.input.isActive">
+                <el-input v-model="dataForm.isActive" :placeholder="data.form.input.isActive"/>
             </el-form-item>
-            <el-form-item prop="webSite" :label="data.form.input.webSite">
-                <el-input v-model="dataForm.webSite" :placeholder="data.form.input.webSite"/>
+            <el-form-item prop="ownerareatext" :label="data.form.input.ownerareatext">
+                <el-input v-model="dataForm.ownerareatext" :placeholder="data.form.input.ownerareatext" />
             </el-form-item>
-            <el-form-item prop="bank" :label="data.form.input.bank">
-                <el-input v-model="dataForm.bank" :placeholder="data.form.input.bank"/>
+            <el-form-item prop="purchaser" :label="data.form.input.purchaser">
+                <el-input v-model="dataForm.purchaser" :placeholder="data.form.input.purchaser"/>
             </el-form-item>
-            <el-form-item prop="bankAccount" :label="data.form.input.bankAccount">
-                <el-input v-model="dataForm.bankAccount" :placeholder="data.form.input.bankAccount"/>
+            <el-form-item prop="businessman" :label="data.form.input.businessman">
+                <el-input v-model="dataForm.businessman" :placeholder="data.form.input.businessman"/>
             </el-form-item>
-            <el-form-item prop="taxNum" :label="data.form.input.taxNum">
-                <el-input v-model="dataForm.taxNum" :placeholder="data.form.input.taxNum"/>
-            </el-form-item>
-            <el-form-item prop="pinyinCode" :label="data.form.input.pinyinCode">
-                <el-input v-model="dataForm.pinyinCode" :placeholder="data.form.input.pinyinCode"/>
-            </el-form-item>
-            <el-form-item prop="wbCode" :label="data.form.input.wbCode">
-                <el-input v-model="dataForm.wbCode" :placeholder="data.form.input.wbCode"/>
-            </el-form-item>
-            <el-form-item prop="pic" :label="data.form.input.pic">
-                <el-input v-model="dataForm.pic" :placeholder="data.form.input.pic"/>
+            <el-form-item prop="mainopname" :label="data.form.input.mainopname">
+                <el-input v-model="dataForm.mainopname" :placeholder="data.form.input.mainopname"/>
             </el-form-item>
             <el-form-item prop="remark" :label="data.form.input.remark">
                 <el-input v-model="dataForm.remark" :placeholder="data.form.input.remark"/>
+            </el-form-item>
+            <el-form-item prop="companyId" :label="data.form.input.companyId">
+                <el-input v-model="dataForm.companyId" :placeholder="data.form.input.companyId" :disabled="dataForm.id"/>
             </el-form-item>
         </el-form>
         <template slot="footer">
@@ -97,38 +71,15 @@ import mixinViewModule from '@/mixins/view-module'
 export default {
   mixins: [mixinViewModule],
   data () {
-    let checkEmail = (rule, value, callback) => {
-      if (value) {
-        let pattern = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-        pattern.test(value) ? callback() : callback(new Error('邮箱格式不正确'))
-      } else {
-        callback()
-      }
-    }
     let checkTel = (rule, value, callback) => {
       if (value) {
-        let pattern = /\d{3}-\d{8}|\d{4}-\d{7}/
+        let pattern = /0?(13|14|15|17|18|19)[0-9]{9}/
         pattern.test(value) ? callback() : callback(new Error('电话格式不正确'))
       } else {
         callback()
       }
     }
-    let checkFax = (rule, value, callback) => {
-      if (value) {
-        let pattern = /^(\d{3,4}-)?\d{7,8}$/
-        pattern.test(value) ? callback() : callback(new Error('传真号码格式不正确'))
-      } else {
-        callback()
-      }
-    }
-    let checkMM = (rule, value, callback) => {
-      if (value) {
-        let pattern = /^[a-zA-Z]{1}[-_a-zA-Z0-9]{5,19}$/
-        pattern.test(value) ? callback() : callback(new Error('微信号码格式不正确'))
-      } else {
-        callback()
-      }
-    }
+
     return {
       mixinViewModuleOptions: {
         getDataListURL: '/base/cust/list',
@@ -139,43 +90,29 @@ export default {
       data: data,
       visible: false,
       dataForm: {
-        id: undefined,
-        custVendor: 'CUST',
-        code: undefined,
-        name: undefined,
-        shortName: undefined,
-        type: undefined,
-        tel: undefined,
-        fax: undefined,
-        email: undefined,
-        mm: undefined,
-        companyAddress: undefined,
-        legalMan: undefined,
-        webSite: undefined,
-        bank: undefined,
-        bankAccount: undefined,
-        taxNum: undefined,
-        pinyinCode: undefined,
-        wbCode: undefined,
-        pic: undefined,
-        remark: undefined,
-        companyId: undefined
+          id: undefined,
+          custVendor: 'CUST',
+          custno: undefined,
+          custname: undefined,
+          custidentify: undefined,
+          contactperson: undefined,
+          contactphone: undefined,
+          custadd: undefined,
+          custtype: undefined,
+          relation: undefined,
+          isActive: undefined,
+          ownerareatext: undefined,
+          purchaser: undefined,
+          businessman: undefined,
+          mainopname: undefined,
+          remark: undefined
       },
       rules: {
-        name: [{
+        custname: [{
           required: true, message: '名称不可缺少'
         }],
-        tel: [{
+          contactphone: [{
           validator: checkTel, trigger: 'blur'
-        }],
-        fax: [{
-          validator: checkFax, trigger: 'blur'
-        }],
-        email: [{
-          validator: checkEmail, trigger: 'blur'
-        }],
-        mm: [{
-          validator: checkMM, trigger: 'blur'
         }]
       }
     }

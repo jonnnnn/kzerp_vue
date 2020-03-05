@@ -218,7 +218,7 @@ export default {
         this.checkForm(),
         this.checkGrid(this.$refs.sGrid)
       ]).then(() => {
-        this.$confirm('确定要保存吗！', '操作提示', {
+        this.$confirm('确定保存?', '操作提示', {
           confirmButtonText: this.$t('views.public.confirm'),
           cancelButtonText: this.$t('views.public.cancel'),
           type: 'info'
@@ -538,7 +538,6 @@ export default {
           }
           rlist = rlist.concat(allDate.fullData)
         }
-
       }else{
         let allDate = grid.getRecordset()
         if (allDate) {
@@ -561,9 +560,10 @@ export default {
             rlist = rlist.concat(allDate.removeRecords)
           }
         }
+
       }
 
-      
+
       return rlist
     },
     footerCellClassName ({ $rowIndex, column, columnIndex, $columnIndex }) {
@@ -583,7 +583,7 @@ export default {
         let footerRender = column.own.footerRender
         if (footerRender) {
           let cellValue = footerRender(column, data)
-          
+
           let cellLabel = cellValue
           let { formatter } = column
           if (formatter && cellValue !='汇总') {
@@ -609,7 +609,7 @@ export default {
       ]
     },
 
-    
+
     removeSelecteds (grid) {
       grid.removeSelecteds().then(() => {
         grid.updateFooter();

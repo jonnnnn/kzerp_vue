@@ -38,13 +38,13 @@
 				<el-button ref="btnStatusAdd" enablestatus='NEW,SUBMIT,SENDED,COMPLETED' size="mini" icon="el-icon-circle-plus"
 				           v-if="$hasPermission('pur:poheader:save')" @click="addHandle">新增
 				</el-button>
-				<el-button ref="btnStatusEdit"
+				<!--<el-button ref="btnStatusEdit"
 				           enablestatus='NEW'
 				           row-dbclick
 				           form-readonly type="primary" size="mini" icon="el-icon-edit"
 				           v-if="$hasPermission('pur:poheader:save')"
 				           @click="e => cellDblClick({row: $refs.pGrid.getCurrentRow()}, e)">修改
-				</el-button>
+				</el-button>-->
 				<el-button ref="btnStatusSubmit"
 				           enablestatus='NEW' type="success" size="mini" icon="el-icon-check"
 				           v-if="$hasPermission('pur:poheader:submit')" @click="submitPoHandle($refs.pGrid,true)">提交
@@ -53,15 +53,15 @@
 				           enablestatus='NEW' type="danger" size="mini" icon="el-icon-delete"
 				           v-if="$hasPermission('pur:poheader:delete')" @click="deleteEntityHandle($refs.pGrid)">删除
 				</el-button>
-        <el-button ref="btnStatusPick"
+     <!--   <el-button ref="btnStatusPick"
                    enablestatus='SUBMIT,SENDED' type="success" size="mini" icon="el-icon-check"
-                   v-if="$hasPermission('pur:poheader:submit')" 
+                   v-if="$hasPermission('pur:poheader:submit')"
                    @click="e => cellDblClick({row: $refs.pGrid.getCurrentRow()}, e)">收货
         </el-button>
 				<el-button ref="btnStatusRollback"
 				           enablestatus='SUBMIT,SENDED' type="warning" size="mini" icon="fa fa-undo"
 				           v-if="$hasPermission('pur:poheader:rollback')" @click="rollbackHandle($refs.pGrid)">撤回
-				</el-button>
+				</el-button>-->
 				<el-button type="info" size="mini" icon="el-icon-printer">打印
 				</el-button>
 				<el-button type="info" size="mini" icon="fa fa-file-excel-o"
@@ -111,7 +111,7 @@ export default {
         orderType: 'PO_ORDER',
         orderNum: '',
         vendorId: '',
-        warehouseId: '',
+		custname: '',
         vendorName: '',
         status: ''
       },
@@ -191,7 +191,14 @@ export default {
       },
       tableColumn: [
         { type: 'index', width: 30, align: 'center' },
-        {
+
+		  {
+			  title: '采购日期',
+			  field: 'orderDate',
+			  sortable: true,
+			  align: 'center',
+			  formatter: ['toDateString', 'yyyy-MM-dd']
+		  },{
           title: '采购单号',
           field: 'orderNum',
           sortable: true,
@@ -199,42 +206,23 @@ export default {
         },
         {
           title: '供应商',
-          field: 'vendorName',
+          field: 'custname',
           sortable: true,
           align: 'center'
         },
-        {
-          title: '仓库',
-          field: 'warehouseCode',
-          sortable: true,
-          align: 'center'
-        },
-        {
-          title: '采购日期',
-          field: 'orderDate',
-          sortable: true,
-          align: 'center',
-          formatter: ['toDateString', 'yyyy-MM-dd']
-        },
+		  {
+			  title: '状态',
+			  field: 'statusMean',
+			  sortable: true,
+			  align: 'center'
+		  },
         {
           title: '采购员',
-          field: 'agentName',
+          field: 'agentname',
           sortable: true,
           align: 'center'
         },
-        {
-          title: '计划交货期',
-          field: 'planDeliveryDate',
-          sortable: true,
-          align: 'center',
-          formatter: ['toDateString', 'yyyy-MM-dd']
-        },
-        {
-          title: '状态',
-          field: 'statusMean',
-          sortable: true,
-          align: 'center'
-        },
+
         {
           title: '采购总金额',
           field: 'orderAmount',
@@ -244,11 +232,10 @@ export default {
           footerRender: this.footerSum
         },
         {
-          title: '采购总运费',
-          field: 'totalFreight',
+          title: '备注',
+          field: 'remark',
           sortable: true,
           align: 'right',
-          formatter: this.formatterMoney,
           footerRender: this.footerSum
         },
         {
